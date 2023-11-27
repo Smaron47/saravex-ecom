@@ -1,0 +1,359 @@
+{%extends 'navbar.html'%}
+ 
+
+{%block contain %}
+
+  <div class="container my-5">
+    <!-- Top Page Design Starts -->
+    <div class="row">
+      <!-- Image Select Button starts  -->
+     <!-- Image Select Button Ends  -->
+
+<!-- Image Select Button Ends  -->
+  
+        <!-- Product Image Starts -->
+        <div class="col-md-5">
+          <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+          <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+          <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+          <!------ Include the above in your HEAD tag ---------->
+          
+          
+            <div class="container px-0">
+              
+              <!-- default start -->
+              <section id="default" class="padding-top0">
+              <div class="row">
+                <div class="column">
+                  <div class="xzoom-container">
+                    <img class="xzoom" id="xzoom-default" src="{{ url_for('static', filename=dat['pic'][0]) }}" xoriginal="{{ url_for('static', filename=dat['pic'][0]) }}" />
+
+                    <div class="xzoom-thumbs py-2">
+                      {%for i in dat['pic']%}
+                      <a href="{{ url_for('static', filename=i) }}"><img class="xzoom-gallery" width="80" src="{{ url_for('static', filename=i) }}"  xpreview="{{ url_for('static', filename=i) }}" title=""></a>
+                      {%endfor%}
+                    </div>
+                  </div>        
+                </div>
+                <div class="column"></div>
+              </div>
+              </section>
+              <!-- default end -->
+            </div>
+            </body>
+            <script src='https://code.jquery.com/jquery-2.1.1.js'></script>
+          <script src='https://unpkg.com/xzoom/dist/xzoom.min.js'></script>
+          <script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js'></script>
+          
+            
+          <script>
+            (function ($) {
+              $(document).ready(function() {
+                  $('.xzoom, .xzoom-gallery').xzoom({zoomWidth: 400, title: true, tint: '#333', Xoffset: 15});
+                  $('.xzoom2, .xzoom-gallery2').xzoom({position: '#xzoom2-id', tint: '#ffa200'});
+                  $('.xzoom3, .xzoom-gallery3').xzoom({position: 'lens', lensShape: 'circle', sourceClass: 'xzoom-hidden'});
+                  $('.xzoom4, .xzoom-gallery4').xzoom({tint: '#006699', Xoffset: 15});
+                  $('.xzoom5, .xzoom-gallery5').xzoom({tint: '#006699', Xoffset: 15});
+          
+                  //Integration with hammer.js
+                  var isTouchSupported = 'ontouchstart' in window;
+          
+                  if (isTouchSupported) {
+                      //If touch device
+                      $('.xzoom, .xzoom2, .xzoom3, .xzoom4, .xzoom5').each(function(){
+                          var xzoom = $(this).data('xzoom');
+                          xzoom.eventunbind();
+                      });
+                      
+                      $('.xzoom, .xzoom2, .xzoom3').each(function() {
+                          var xzoom = $(this).data('xzoom');
+                          $(this).hammer().on("tap", function(event) {
+                              event.pageX = event.gesture.center.pageX;
+                              event.pageY = event.gesture.center.pageY;
+                              var s = 1, ls;
+              
+                              xzoom.eventmove = function(element) {
+                                  element.hammer().on('drag', function(event) {
+                                      event.pageX = event.gesture.center.pageX;
+                                      event.pageY = event.gesture.center.pageY;
+                                      xzoom.movezoom(event);
+                                      event.gesture.preventDefault();
+                                  });
+                              }
+              
+                              xzoom.eventleave = function(element) {
+                                  element.hammer().on('tap', function(event) {
+                                      xzoom.closezoom();
+                                  });
+                              }
+                              xzoom.openzoom(event);
+                          });
+                      });
+          
+                  $('.xzoom4').each(function() {
+                      var xzoom = $(this).data('xzoom');
+                      $(this).hammer().on("tap", function(event) {
+                          event.pageX = event.gesture.center.pageX;
+                          event.pageY = event.gesture.center.pageY;
+                          var s = 1, ls;
+          
+                          xzoom.eventmove = function(element) {
+                              element.hammer().on('drag', function(event) {
+                                  event.pageX = event.gesture.center.pageX;
+                                  event.pageY = event.gesture.center.pageY;
+                                  xzoom.movezoom(event);
+                                  event.gesture.preventDefault();
+                              });
+                          }
+          
+                          var counter = 0;
+                          xzoom.eventclick = function(element) {
+                              element.hammer().on('tap', function() {
+                                  counter++;
+                                  if (counter == 1) setTimeout(openfancy,300);
+                                  event.gesture.preventDefault();
+                              });
+                          }
+          
+                          function openfancy() {
+                              if (counter == 2) {
+                                  xzoom.closezoom();
+                                  $.fancybox.open(xzoom.gallery().cgallery);
+                              } else {
+                                  xzoom.closezoom();
+                              }
+                              counter = 0;
+                          }
+                      xzoom.openzoom(event);
+                      });
+                  });
+                  
+                  $('.xzoom5').each(function() {
+                      var xzoom = $(this).data('xzoom');
+                      $(this).hammer().on("tap", function(event) {
+                          event.pageX = event.gesture.center.pageX;
+                          event.pageY = event.gesture.center.pageY;
+                          var s = 1, ls;
+          
+                          xzoom.eventmove = function(element) {
+                              element.hammer().on('drag', function(event) {
+                                  event.pageX = event.gesture.center.pageX;
+                                  event.pageY = event.gesture.center.pageY;
+                                  xzoom.movezoom(event);
+                                  event.gesture.preventDefault();
+                              });
+                          }
+          
+                          var counter = 0;
+                          xzoom.eventclick = function(element) {
+                              element.hammer().on('tap', function() {
+                                  counter++;
+                                  if (counter == 1) setTimeout(openmagnific,300);
+                                  event.gesture.preventDefault();
+                              });
+                          }
+          
+                          function openmagnific() {
+                              if (counter == 2) {
+                                  xzoom.closezoom();
+                                  var gallery = xzoom.gallery().cgallery;
+                                  var i, images = new Array();
+                                  for (i in gallery) {
+                                      images[i] = {src: gallery[i]};
+                                  }
+                                  $.magnificPopup.open({items: images, type:'image', gallery: {enabled: true}});
+                              } else {
+                                  xzoom.closezoom();
+                              }
+                              counter = 0;
+                          }
+                          xzoom.openzoom(event);
+                      });
+                  });
+          
+                  } else {
+                      //If not touch device
+          
+                      //Integration with fancybox plugin
+                      $('#xzoom-fancy').bind('click', function(event) {
+                          var xzoom = $(this).data('xzoom');
+                          xzoom.closezoom();
+                          $.fancybox.open(xzoom.gallery().cgallery, {padding: 0, helpers: {overlay: {locked: false}}});
+                          event.preventDefault();
+                      });
+                     
+                      //Integration with magnific popup plugin
+                      $('#xzoom-magnific').bind('click', function(event) {
+                          var xzoom = $(this).data('xzoom');
+                          xzoom.closezoom();
+                          var gallery = xzoom.gallery().cgallery;
+                          var i, images = new Array();
+                          for (i in gallery) {
+                              images[i] = {src: gallery[i]};
+                          }
+                          $.magnificPopup.open({items: images, type:'image', gallery: {enabled: true}});
+                          event.preventDefault();
+                      });
+                  }
+              });
+          })(jQuery);
+          </script>
+          
+      </div> <!-- Product Image Ends -->
+  
+
+
+
+
+      <!-- Product Details Starts -->
+      <div class="col-md-3">
+        <h6 class="font-weight-bold">{{dat['titel']}}
+        </h6>
+        <p>
+          <i class="fas fa-star text-warning"></i>
+          <i class="fas fa-star text-warning"></i>
+          <i class="fas fa-star text-warning"></i>
+          <i class="fas fa-star text-warning"></i>
+          <i class="fas fa-star-half-alt text-warning"></i>
+        </p>
+          {{city}}
+        <div class="dropdown-divider mt-3"></div>
+        <p class="mb-0">
+          <span class="text-muted mr-2">M.R.P.:</span>
+          <span class="text-danger font-weight-bold"><i class="fas fa-rupee-sign"></i>{{dat['price']}}</span>
+        </p>
+
+
+        <!-- Delivery Quality Images starts -->
+        <div class="row" style="font-size: 12px; font-weight: bold;">
+          <div class="col-md-3">
+            <img src="{{ url_for('static', filename='img/product_main/delivery01.png')}}" width="35" height="35" class="rounded" alt="" srcset="">
+            <br>
+            <a href="#">No contact delivery</a>
+          </div>
+          <div class="col-md-3">
+            <img src="{{ url_for('static', filename='img/product_main/delivery02.png')}}" width="35" height="35" class="rounded" alt="" srcset="">
+            <br>
+            <a href="#">7 Day Replacement</a>
+          </div>
+          <div class="col-md-3">
+            <img src="{{ url_for('static', filename='img/product_main/delivery03.png')}}" width="35" height="35" class="rounded" alt="" srcset="">
+            <br>
+            <a href="#">Saravex Delivered</a>
+          </div>
+          <div class="col-md-3">
+            <img src="{{ url_for('static', filename='img/product_main/delivery04.png')}}" width="35" height="35" class="rounded" alt="" srcset="">
+            <br>
+            <a href="#">1 Year Waranty</a>
+          </div>
+        </div> <!-- Delivery Quality Images ends -->
+
+        <div class="dropdown-divider mt-3"></div>
+
+        <p class="text-success font-weight-bold">In stock.</p>
+        <p>Sold by:
+          <a href="#">{{dat['seller']}}</a>
+        </p>
+
+        <!-- Product Description Starts -->
+        <ul class="ml-n3">
+          
+        </ul> <!-- Product Description Ends -->
+
+      </div> <!-- Product Details Starts -->
+
+      <!-- Add Product Card starts -->
+      <div class="col-md-3 text-center">
+
+        <!-- Card starts -->
+        <div class="card shadow rounded float-md-right" >
+          <div class="card-body">
+
+
+            <p class="mb-0">
+              <span class="text-muted mr-2">M.R.P.:</span>
+              <span class="text-danger font-weight-bold">৳ {{dat['price']}}</span>
+            </p>
+
+            <a href="/add_to_cart/{{i}}" class="btn btn-warning btn-sm btn-block mt-3">
+              <i class="fas fa-cart-plus float-left text-primary" style="font-size: 25px;"></i>
+              Add to cart
+            </a>
+
+            <div class="dropdown-divider"></div>
+            <a href="#">
+              <i class="fas fa-map-marker-alt text-dark"></i>
+              {{city}}
+            </a>
+          </div>
+        </div> <!-- Card ends  -->
+
+
+
+      </div> <!-- Add Product Card ends -->
+    </div> <!-- Top Page Design Ends -->
+
+
+
+    <div class="row border-bottom mt-3">
+      <div class="col-md-12 my-3">
+        <h6 class="text-danger font-weight-bold">Product description</h6>
+        <p class="ml-3">{{dat['descip']}}</p>
+      </div>
+    </div>
+
+
+    <!-- Customer Review starts -->
+    <div class="row my-5">
+      <div class="col-md-4">
+        <p class="text-capitalize font-weight-bold">avg. customer review</p>
+        <button class="btn btn-sm bg-transparent">
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <span class="rating">& Up</span>
+        </button>
+        <br />
+        <button class="btn btn-sm bg-transparent">
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <span class="rating">& Up</span>
+        </button>
+        <br />
+        <button class="btn btn-sm bg-transparent">
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <span class="rating">& Up</span>
+        </button>
+        <br />
+        <button class="btn btn-sm bg-transparent">
+          <i class="fas fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <i class="far fa-star" style="color: #ffa41c;"></i>
+          <span class="rating">& Up</span>
+        </button>
+        <br />
+      </div>
+
+      <div class="col-md-8">
+        <p class="text-capitalize font-weight-bold">Top reviews from India</p>
+
+
+        <div class="dropdown-divider mt-3"></div>
+        <!-- <a href="#" class="font-weight-bold">See all reviews <i class="fas fa-caret-right"></i></a> -->
+      </div>
+    </div> <!-- Customer Review ends -->
+  </div>
+  <!-- Footer Starts -->
+ {%endblock%}

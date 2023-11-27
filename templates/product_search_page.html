@@ -1,0 +1,105 @@
+{%extends 'navbar.html'%}
+
+
+{% block contain %}
+
+  <!-- Products Page Starts -->
+  <div class="container my-5">
+    <div class="row">
+      <!-- Left hand filter starts -->
+      <div class="col-md-3">
+        <p class="text-capitalize font-weight-bold"></p>
+
+        <br />
+
+        <br />
+
+        <br />
+
+        <br />
+      </div> <!-- Left hand filter ends -->
+
+      <!-- Product list starts -->
+      <div class="col-md-5">
+
+        <!-- Single product detail starts -->
+ <!-- Single product detail ends -->
+
+        <!-- Single product detail starts -->
+
+  <!-- Single product detail ends -->
+
+
+        <!-- Single product detail starts -->
+ <!-- Single product detail ends -->
+
+{%if data == "No Search match"%}
+<h1>{{data}}</h1>
+{%else%}
+{% for i in data%}
+<a href="/product/{{i}}">
+  <!-- Single product detail starts -->
+  <div class="row border-top py-3">
+    <!-- Product image starts -->
+    <div class="col-md-4 text-center">
+      <img src="{{ url_for('static', filename=data[i]['pic'][0]) }}" alt="product image 01" height="60px" width="45px">
+    </div> <!-- Product image ends -->
+    
+    <!-- Product details starts -->
+    <div class="col-md-8">
+      <a href="/product/{{i}}">{{data[i]["titel"]}}</a>
+      <p class="text-muted my-0"> Sold By: {{data[i]['seller']}}</p>
+      <p>
+        <i class="fas fa-star" style="color: #ffa41c;"></i>
+        <i class="fas fa-star" style="color: #ffa41c;"></i>
+        <i class="fas fa-star" style="color: #ffa41c;"></i>
+        <i class="fas fa-star-half-alt" style="color: #ffa41c;"></i>
+        <i class="far fa-star" style="color: #ffa41c;"></i>
+      </p>
+      <p class="text-uppercase my-0 font-weight-bold text-danger">
+        <i class="fas fa-rupee-sign" style="font-size: 10px;"></i>{{data[i]['price']}}
+      </p>
+    </div> <!-- Product details ends -->
+
+  </div></a> <!-- Single product detail ends -->
+  {%endfor%}
+{%endif%}
+        <!-- Single product detail starts -->
+ <!-- Single product detail ends -->
+
+
+        <!-- Single product detail starts -->
+ <!-- Single product detail ends -->
+
+        <!-- Pagination Starts -->
+        <div class="row border-bottom border-top pt-3">
+          <div class="col-md-12 d-flex justify-content-center">
+            <nav aria-label="...">
+              <ul class="pagination">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                     Previous
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active" aria-current="page">
+                  <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">
+                    Next 
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+      </div> <!-- Product list ends -->
+    </div>
+  </div>
+
+  {%endblock%}

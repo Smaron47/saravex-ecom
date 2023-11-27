@@ -1,0 +1,171 @@
+{%extends 'navbar.html'%}
+ 
+
+{%block contain %}
+
+
+
+  <div class="container my-5">
+    <!-- URL Breadcrumb Starts -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb bg-transparent ml-n3">
+        <li class="breadcrumb-item"><a href="your_seller_account.html">Your Seller Account</a></li>
+        <li class="breadcrumb-item active text-danger" aria-current="page">Add New Product</li>
+      </ol>
+    </nav> <!-- URL Breadcrumb Ends -->
+
+    <h3>Add New Product</h3>
+
+    <!-- Select Category Starts -->
+    
+    
+    <!-- Product Form Starts -->
+    <form class="needs-validation" autocomplete="off" method="post" novalidate action="/upload_product" enctype="multipart/form-data">
+      <style>
+        .disaplayInput{
+display: none;
+}
+      </style>
+      <script>
+        const mySelect = document.getElementById("textSelect");
+        const inputOther = document.getElementById("form12");
+        const labelInput = document.getElementById("inputLabel");
+        const divInput = document.getElementById("inputDiv");
+        const selectDiv = document.getElementById("textSelectdiv");
+
+        mySelect.addEventListener('optionSelect.mdb.select', function(e){
+        const SelectValue = document.getElementById('textSelect').value;
+        if (SelectValue === 'customOption') {
+        inputOther.style.display='inline';
+        inputOther.removeAttribute('disabled');
+        labelInput.classList.remove('disaplayInput');
+        divInput.classList.remove('disaplayInput');
+        selectDiv.style.display='none';
+        inputOther.focus();
+        mySelect.disabled = 'true';
+
+        } else {
+        a.style.display='none';
+        }
+        })
+
+        function hideInput(){
+        if (inputOther !== null && inputOther.value === "")
+        {
+        inputOther.style.display='none';
+        inputOther.setAttribute('disabled', '');
+        selectDiv.style.display='inline';
+        mySelect.removeAttribute('disabled');
+        labelInput.classList.add('disaplayInput');
+        divInput.classList.add('disaplayInput');
+        }
+        }
+      </script>
+      <div id="textSelectdiv">
+        <select id="textSelect" class="select" style="display: inline;">
+          {%for i in cata%}
+          <option value="{{i}}">{{i}}</option>
+          {%endfor%}
+          <option value="customOption">Other</option>
+        </select>
+        <label class="form-label select-label">Example label</label>
+      </div>
+      <div id="inputDiv" class="form-outline disaplayInput">
+        <input type="text" id="form12" class="form-control" style="display: none;" onblur="hideInput()" disabled />
+        <label id="inputLabel" class="form-label disaplayInput" for="form12">Other</label>
+      </div>
+       <!-- Select Category Ends -->
+      
+      <!-- Product General Info Card Starts -->
+      <div class="card mx-auto" style="width: 50rem;">
+        <div class="card-header bg-warning">
+          <p class="font-weight-bold mb-0">Product General Information</p>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="productTitle">Product Title:</label>
+            <input type="text" placeholder="ABC Product" required class="form-control" id="productTitle" name="title">
+          </div>
+
+          <div class="form-group">
+            <label for="productDescription">Description:</label>
+            <textarea class="form-control" id="productDescription" rows="3" required name="description"></textarea>
+            <small class="text-muted font-weight-bold">Write description with comma(,) seperate values to create a list.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="productPrice">Product Price:</label>
+            <input type="text" placeholder="150.00" required class="form-control" id="productPrice" name="price">
+          </div>
+
+          <div class="form-group">
+            <label for="productDiscount">Product Discount(%):</label>
+            <input type="text" placeholder="40" required class="form-control" required id="productDiscount" name="discount">
+          </div>
+
+          <div class="form-group">
+            <label for="productDiscount">Product Quantity:</label>
+            <input type="text" placeholder="40" required class="form-control" required id="productDiscount" name="number">
+          </div>
+          <input type="text" value="book" name="productCategory" id="productCategory" hidden>
+        </div>
+      </div> <!-- Product General Info Card Ends -->
+      
+      <!-- Search Page Image Card Starts -->
+      <div class="card mx-auto mt-3" style="width: 50rem;">
+        <div class="card-header bg-warning">
+          <p class="font-weight-bold mb-0">Search Page Image Upload</p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="searchPageImage">Search Page Image:</label>
+                <input type="file" class="form-control-file" id="searchPageImage" required name="file1">
+                <small class="text-muted font-weight-bold">( width >=130px or 170px <= Width ) And ( height = 218px )</small>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="searchPageImage">Image 1</label>
+                <input type="file" class="form-control-file" id="searchPageImage" required name="file2">
+                <small class="text-muted font-weight-bold">( width >=130px or 170px <= Width ) And ( height = 218px )</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="searchPageImage">Image 2</label>
+                <input type="file" class="form-control-file" id="searchPageImage" required name="file3">
+                <small class="text-muted font-weight-bold">( width >=130px or 170px <= Width ) And ( height = 218px )</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="searchPageImage">Image 3</label>
+                <input type="file" class="form-control-file" id="searchPageImage" required name="file4">
+                <small class="text-muted font-weight-bold">( width >=130px or 170px <= Width ) And ( height = 218px )</small>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <!-- <img src="img/add_new_product/search_page_image_help.png" class="img-fluid" alt="search page image" > -->
+            </div>
+          </div>
+        </div>
+      </div> <!-- Search Page Image Card Ends -->
+
+      <!-- Product Main Page Image Card Starts -->
+      <div class="card mx-auto mt-3" style="width: 50rem;">
+
+
+        <button type="submit" class="btn btn-sm btn-outline-danger">
+          <div class="card-body py-0">
+            <i class="fas fa-cart-plus fa-3x"> Create</i>
+          </div>
+        </button>
+      </div> <!-- Product Main Page Image Card Ends -->
+
+    </form>
+
+  </div>
+{%endblock%}

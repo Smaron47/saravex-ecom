@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  
+  <!-- saravex FavIcon -->
+  <link rel="icon" href="img/saravex_favicon.ico" image="image/gif" size="16x16">
+  <!-- Bootstrap CSS
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/./static/./static/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+
+  <!-- Font Awesome CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
+    <!-- Bootstrap CSS Local -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <!-- Drawer CSS File -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-drawer.min.css') }}">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    var viewMode = getCookie("view-mode");
+  if(viewMode == "desktop"){
+    viewport.setAttribute('content', 'width=1024');
+  }else if (viewMode == "mobile"){
+    viewport.setAttribute('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
+  }
+  </script>
+
+  <title>Saravex</title>
+</head>
+
+<body>
+  <!-- Navbar Starts -->
+  <nav id="pageTop" class="navbar navbar-expand-md navbar-dark"style="background-color:#232f3f;">
+    <!-- Drawer Start -->
+
+
+    <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Location_icon_from_Noun_Project.png/600px-Location_icon_from_Noun_Project.png?20210513221840" height="30" width="30" alt="" > -->
+ <!-- Drawer Ends -->
+
+    <div class="d-md-none d-sm-inline-block text-light" type="button" data-toggle="drawer" data-target="#saravexDrawer"
+    aria-controls="saravexDrawer" aria-expanded="false"style="width: auto; height:auto;">
+    <i class="navbar-toggler-icon text-danger"></i>
+    
+  </div>
+  <div class="d-md-none d-sm-inline-block text-light">
+
+    <a class="navbar-brand" href="/">
+      <img src="https://saravexhypermarket.com/wp-content/uploads/2022/09/LogoMakr-5fymGM.png" height="auto" width="120" alt="saravex logo white">
+    </a>
+  </div>
+  
+  <div class="d-none d-md-block text-light">
+    <a class="navbar-brand" href="/">
+      <img src="https://saravexhypermarket.com/wp-content/uploads/2022/09/LogoMakr-5fymGM.png" height="auto" width="auto" alt="saravex logo white">
+    </a>
+  </div>
+  <div class="d-none d-md-block text-light w-10">
+
+    <img src="{{ url_for('static', filename='img/Gps-location-blue-icon-on-transparent-PNG.png')}}" alt="" width="30px" height="35px" style="background-color: transparent;" class="text-light">
+      {{city}}
+  </div>
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">boro kichu ache</div> -->
+    
+    <div class="d-md-none d-sm-inline-block">
+      {% if user %}
+      <a href="/profile" style="font-size: 15px; color: white; font-weight: bold;" class="text-light">Hi, {{user.split(" ")[0]}}
+      </a>
+      {%else%}
+      <a href="/login" style="font-size: 15px; color: white; font-weight: bold;" class="text-light">Login / Register
+      </a>
+      {%endif%}
+
+    </div>
+    <div class="d-md-none d-sm-inline-block">
+      {% if cart%}
+      <a href="/your_orders" class="text-light"><i class="fas fa-(1.5)x fa-shopping-cart">{{cart}}</i></a>
+      {%else%}
+      <a href="/your_orders" class="text-light"><i class="fas fa-1x text-muted fa-shopping-cart">0</i></a>
+      {%endif%}
+    </div>
+    <form class="needs-validation" autocomplete="off" method="post" novalidate action="/searche_name" enctype="multipart/form-data">
+      
+          <div class="input-group">
+            <div class="input-group-prepend">
+              
+              <div class="dropdown d-none d-md-inline-block ">
+                <div class="btn dropdown-toggle input-group-text border-2" name="btnCategory" type="button"
+                id="btnCategoryDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000000; background-color:#f3f3f3;">
+                All
+              </div>
+              <div class="dropdown-menu" aria-labelledby="btnCategoryDropdownMenu">
+                {%for i in dl%}
+                <a class="dropdown-item" href="/catagory_i/{{i}}">{{i}}</a>
+                {%endfor%}
+              </div>
+            </div>
+            </div>
+            <input type="text" class="form-control" size="50" placeholder="Search Saravex" name="searche_name">
+            <div class="input-group-append">
+              <button class="btn input-group-text" type="submit" style="background-color: #ffb967; border: 2px; color: black;"><i class="fa fa-search text-deep"></i></button>
+            </div>
+          </div>
+
+    </form>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+      <!-- Search Bar Starts -->
+ <!-- Search Bar Ends -->
+      <ul class="navbar-nav">
+        <!-- Preffered Language Starts -->
+        <li class="nav-item dropdown px-2">
+          <a class="nav-link" href="#" id="prefLanguageDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-2x fa-language"></i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="prefLanguageDropdown">
+            <form class="p-3">
+              <div class="dropdown-divider"></div>
+              <div class="custom-control custom-radio mb-2">
+                <input class="custom-control-input" type="radio" name="prefLang" id="hindiLang" value="hindi" checked>
+                <label class="custom-control-label" for="hindiLang">
+                  <img src="{{ url_for('static', filename='img/flag/hindi.svg')}}" alt="" width="50" height="30">
+                </label>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="custom-control custom-radio mb-2">
+                <input class="custom-control-input" type="radio" name="prefLang" id="urduLang" value="urdu" checked>
+                <label class="custom-control-label" for="urduLang">
+                  <img src="{{ url_for('static', filename='img/flag/urdu.svg')}}" alt="" width="50" height="30">
+                </label>
+              </div>
+              <div class="dropdown-divider"></div>
+              <div class="custom-control custom-radio">
+                <input class="custom-control-input" type="radio" name="prefLang" id="banglaLang" value="bangla" checked>
+                <label class="custom-control-label" for="banglaLang">
+                  <img src="{{ url_for('static', filename='img/flag/bangla.png')}}" alt="" width="50" height="30">
+                </label>
+              </div>
+              <div class="dropdown-divider"></div>
+            </form>
+          </div>
+        </li> <!-- Preffered Language Ends -->
+        {% if user %}
+          <li class="nav-item px-2 py-3">
+            <a href="/profile" style="font-size: 15px; color: white; font-weight: bold;" class="text-light">Hi, {{user.split(" ")[0]}}
+            </a></li> 
+            {%else%}
+            <li class="nav-item dropdown px-2">
+          <a class="nav-link" href="/login" id="userAccount" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-2x text-light fa-user"></i>
+          </a>
+          <div class="dropdown-menu px-3" aria-labelledby="userAccount">
+            <div class="d-flex flex-column justify-content-center">
+              <a href="/login" class="btn btn-warning w-75 btn-sm font-weight-bold">Signin</a>
+              <small>New customer?<a href="/register"> Start here.</a></small>
+            </div>
+          </div>
+        </li> <!-- User Account Ends -->
+          {%endif%}
+    
+        <!-- User Account Starts -->
+        <li class="nav-item px-2 py-2">
+          <a class="nav-link text-light" href="/your_orders" aria-disabled=" true">
+            Return Order
+          </a>
+        </li>
+        <!-- Shopping Cart Starts -->
+
+        <li class="nav-item px-1">
+          <a class="nav-link" href="/your_orders" aria-disabled=" true">
+            {% if cart%}
+            <a href="/your_orders" class="text-light"><i class="fas fa-2x fa-shopping-cart">{{cart}}</i></a>
+            {%else%}
+            <a href="/your_orders" class="text-light"><i class="fas fa-2x text-muted fa-shopping-cart">0</i></a>
+            {%endif%}
+          </a>
+        </li> <!-- Shopping Cart Starts -->
+      </ul>
+    </div>
+  </nav> <!-- Navbar Ends -->
+
+
+  <nav class="navbar navbar-expand-md " style="height: auto; background-color: #232f3f;">
+    
+    <div class="drawer drawer-left slide" tabindex="-1" role="dialog" aria-labelledby="drawer-demo-title"
+      aria-hidden="true" id="saravexDrawer">
+      <div class="drawer-content drawer-content-scrollable" role="document">
+        
+        {% if user %}
+        
+          <div class="drawer-header bg-dark text-white">
+            <h4 class="drawer-title mx-auto" id="drawer-demo-title">
+              <i class="fas fa-user-circle"></i>
+              Hello, {{user.split(" ")[0]}}
+            </h4>
+          </div>
+          
+          <div class="drawer-body">
+            <h6 class="text-muted text-uppercase">Help & Settings</h6>
+            <a href="/profile" class="btn btn-outline-success my-2 btn-sm">You Account</a>
+            <a href="/logout" class="btn btn-warning my-2  btn-sm">Logout</a>
+          </div>
+        {%else%}
+        <div class="drawer-header bg-dark text-white">
+          <h4 class="drawer-title mx-auto" id="drawer-demo-title">
+            <i class="fas fa-user-circle"></i>
+            Hello, Sign In
+          </h4>
+        </div>
+        <div class="drawer-body">
+          <h6 class="text-muted text-uppercase">Help & Settings</h6>
+          <a href="/register" class="btn btn-outline-success my-2 btn-sm">Register</a>
+          <a href="/login" class="btn btn-warning my-2  btn-sm">Log in</a>
+          <h6 class="text-muted text-uppercase">Catagorys</h6>
+          {%for i in dl%}
+          <a href="/catagory_i/{{i}}" class="btn btn-success my-2 btn-sm text-capitalize">{{i}}</a>
+          {%endfor%}
+        </div>
+        
+        {%endif%}
+
+        <div class="drawer-footer">
+          <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="drawer" aria-label="Close">
+            <i class="fas fa-2x fa-times"></i>
+          </button>
+        </div>
+        <div class="drawer-header bg-dark text-white">
+          <h4 class="drawer-title mx-auto" id="drawer-demo-title">
+            <i class="fas fa-user-circle"></i>
+            customer
+          </h4>
+        </div>
+        <div class="drawer-header bg-dark text-white">
+          <h4 class="drawer-title mx-auto" id="drawer-demo-title">
+            <i class="fas fa-user-circle"></i>
+            Today's Deal
+          </h4>
+        </div>
+      </div>
+    </div> <!-- Drawer Ends -->
+  
+    <ul class="navbar-nav d-flex flex-row " style="height: 30px; margin-top: -9px; font-size: 15px; font-weight: bold;">
+
+
+<!-- User Account Ends -->
+    <!-- Shopping Cart Starts -->
+    <li class="px-2 py-2">
+
+      <div class="d-none d-md-inline-block text-light" type="button" data-toggle="drawer" data-target="#saravexDrawer"
+    aria-controls="saravexDrawer" aria-expanded="false">
+    <i class="fas fa-sliders-h"></i>
+      All
+    </div>
+    </li>
+    <li class="px-2 py-0">
+      <a class="nav-link" href="/" aria-disabled=" true">
+        <text class="text-white">Home</texT> 
+      </a>
+    </li>
+
+    <li class="px-2 py-0">
+      <a class="nav-link" href="/contactus" aria-disabled=" true">
+        <text class="text-white">Contact US</texT> 
+      </a>
+    </li>
+    <li class="px-2 py-0">
+      <a class="nav-link" href="/about_us" aria-disabled=" true">
+        <text class="text-white">About US</texT> 
+      </a>
+    </li>
+  </ul>
+
+
+  
+  </nav>
+   <div class="d-md-none d-sm-inline-block text-light px-3" style="background-color: #364759; font-size: 15px;">
+    <img src="{{ url_for('static', filename='img/Gps-location-blue-icon-on-transparent-PNG.png')}}" alt="" width="20px" height="25px" style="background-color: transparent;" class="text-light">
+     Delivar to {{city}}
+  </div>
+  <div class="container-fluid px-0">
+
+
+
+{% block contain %}
+
+{%endblock%}
+
+
+<!-- Footer Starts -->
+<div class="container-fluid px-0" style="background-color: #232f3e;">
+  <a href="#pageTop" class="btn  btn-block mb-5" style="background-color: #37475a; color: whitesmoke;">Back to Top</a>
+  
+  <div class="container" >
+    <div class="row text-white mb-5" >
+
+      <div class="col-md-3">
+        <h5>Get to know us</h5>
+        <ul id="menu-policies" class="menu"><li id="menu-item-11070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11070"><a href="/terms_and_condition">Terms and Conditions</a></li>
+          <li id="menu-item-11067" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-11067"><a href="/privacy_policy">Privacy Policy</a></li>
+          <li id="menu-item-11068" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11068"><a href="/return_policy">Return Policy</a></li>
+          
+          </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h5>Top Category</h5>
+        <div class="menu-top-categories-container" style="color:wheat;"><ul id="menu-top-categories" class="menu">
+          {% for i in dl%}
+          
+          <li id="menu-item-11055" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-11055"><a href="/catagory_i/{{i}}">{{i}}</a></li>
+          
+          {%endfor%}
+          </ul></div>
+      </div>
+
+      <div class="col-md-3">
+        <h5>Know US</h5>
+        <ul id="menu-know-us" class="menu"><li id="menu-item-11061" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11061"><a href="/about_us">About Us</a></li>
+          <li id="menu-item-11062" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11062"><a href="/contactus">Contact Us</a></li>
+          <li id="menu-item-11063" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11063"><a href="/">Feedback</a></li>
+          <li id="menu-item-11064" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11064"><a href="/faq">FAQs</a></li>
+
+          </ul>
+      </div>
+
+      <div class="col-md-3">
+        <img src="https://saravexhypermarket.com/wp-content/uploads/2022/09/LogoMakr-5fymGM.png" height="50" width="150" alt="saravex logo white footer">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="dropdown-divider mt-3"></div>
+
+  <!-- <div class="row mt-3 mx-0 px-0">
+    <div class="col-md-12 text-center">
+       <img src="https://saravexhypermarket.com/wp-content/uploads/2022/09/LogoMakr-5fymGM.png" height="30" width="100" alt="saravex logo white footer"> 
+      <br>.
+    </div>
+  </div> -->
+  
+  <!-- Sub footer starts -->
+  <!-- Sub footer ends -->
+  
+</div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <!-- Drawer JS File -->
+  <script src="./static/js/bootstrap-drawer.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="./static/js/custom.js"></script>
+</body>
+
+</html>

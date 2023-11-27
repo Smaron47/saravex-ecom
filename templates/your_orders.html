@@ -1,0 +1,79 @@
+{%extends 'navbar.html'%}
+ 
+
+{%block contain %}
+
+
+  <div class="container mt-5 mb-5">
+    <!-- URL Breadcrumb Starts -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb bg-transparent ml-n3">
+        <li class="breadcrumb-item"><a href="/profile">Your Account</a></li>
+        <li class="breadcrumb-item active text-danger" aria-current="page">Your Orders</li>
+      </ol>
+    </nav> <!-- URL Breadcrumb Ends -->
+
+    <!-- Search Orders Starts -->
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Your Orders</h3>
+       
+      </div>
+
+    </div> <!-- Search Orders Starts -->
+    {%for i in dat%}
+    <!-- Order Card Starts -->
+    <div class="card mt-5">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-4 mt-3 mt-md-0">
+            <p class="text-uppercase text-muted my-0">{{dat[i]['titel']}}</p>
+            <p class="text-uppercase text-muted my-0"></p>
+          </div>
+
+          <div class="col-md-4 mt-3 mt-md-0">
+            <p class="text-uppercase text-muted my-0"></p>
+            <p class="text-uppercase text-muted my-0">
+              
+            </p>
+          </div>
+
+          <div class="col-md-4 mt-3 mt-md-0">
+            <p class="text-uppercase text-muted my-0 float-md-right"></p>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-1">
+            <img src="{{ url_for('static', filename=dat[i]['pic'][0]) }}" width="58" height="90" alt="product 01 image">
+          </div>
+
+          <div class="col-md-5">
+            <a href="/product/{{i}}">{{dat[i]['titel']}}</a>
+            <p class="text-muted my-0">Sold by : {{dat[i]['seller']}}<p>
+            <p class="text-uppercase my-0">
+              <i class="fas fa-rupee-sign"></i> <span class="text-danger">{{dat[i]['price']}}</span>
+            </p>
+          </div>
+
+          <div class="col-md-6 d-flex flex-column">
+            <a href="/cancel_order/{{i}}" class="btn btn-outline-secondary btn-sm w-50 ml-auto my-1">Cancel Order</a>
+            <a href="/confirm_order/{{i}}" class="btn btn-outline-info btn-sm w-50 ml-auto my-1">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div> <!-- Order Card Starts -->
+{%endfor%}
+<div class="row">
+<div class="col-md-5">
+  <br>
+</div>
+<div class="col-md-5">
+  <br>
+  <h5 class="">Total: <i class="fas fa-rupee-sign text-danger"></i> {{total}}</h5>
+</div></div>
+  </div>
+
+  <!-- Footer Starts -->
+{%endblock%}

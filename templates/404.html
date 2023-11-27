@@ -1,0 +1,69 @@
+{%extends 'navbar.html'%}
+
+{%block contain%}
+<center>
+{%if cat%}
+	{%if u%}
+	<div class="card-body">
+		<div class="row">
+			
+			<div class="col-md-1">
+			  </div>
+			<div class="col-md-8">
+			<center>
+			  <i class="fas fa-5x fa-shopping-cart text-muted"></i>
+            <h3>
+
+				<p>Your Cart Is Empty. Add Product To Your Cart....</p>
+			</h3>
+            <p class="text-muted my-0"><p>
+            <p class="text-uppercase my-0">
+			</p>
+			<a href="/" class="btn btn-outline-secondary btn-warning btn-sm w-50 ml-auto my-1">Home</a>
+			
+		</center>
+		</div>
+		
+
+        </div>
+      </div>
+	{%else%}
+	<div class="card-body">
+		<div class="row">
+			
+			<div class="col-md-1">
+			  </div>
+			<div class="col-md-8">
+			<center>
+			  <i class="fas fa-5x fa-shopping-cart text-muted"></i>
+            <h3>
+
+				<p>Opps! Your Cart Is Empty. Login And Add Product...</p>
+			</h3>
+            <p class="text-muted my-0"><p>
+            <p class="text-uppercase my-0">
+			</p>
+			<a href="/login" class="btn btn-outline-secondary btn-warning btn-sm w-50 ml-auto my-1">Sign In</a>
+			<a href="/register" class="btn btn-outline-info btn-warning btn-sm w-50 ml-auto my-1">Sign UP</a>
+		</center>
+		</div>
+		
+
+        </div>
+      </div>
+	{%endif%}
+{%else%}
+<h1>
+	{{data}}
+</h1>
+
+{%endif%}
+</center>
+
+
+
+
+
+
+
+{%endblock%}

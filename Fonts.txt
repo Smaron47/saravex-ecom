@@ -1,0 +1,5 @@
+Fonts used in this design:
+
+Font: Fira Sans
+Author: Carrois Apostrophe
+Url: https://fonts.google.com/specimen/Fira+Sans
